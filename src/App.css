@@ -1,0 +1,28 @@
+body {
+    margin: auto;
+    max-width: 1250px;
+    background-color: pink;
+    
+}
+
+.list {
+    background-color: white;
+    max-width: 600px;
+    margin: auto;
+    text-align: center;
+}
+
+.todo-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    padding: 0;
+    margin: 0;
+}
+
+.todo-item {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}

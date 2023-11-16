@@ -2,7 +2,14 @@ body {
     margin: auto;
     max-width: 1250px;
     background-color: pink;
-    
+    font-family: 'Inter', sans-serif;
+    font-family: 'Libre Baskerville', serif;
+    font-family: 'Merriweather', serif;
+    font-family: 'Mooli', sans-serif;
+    font-family: 'Mulish', sans-serif;
+    font-family: 'Pridi', serif;
+    font-family: 'Roboto', sans-serif;
+    font-family: 'Signika', sans-serif;
 }
 
 .list {
@@ -10,6 +17,12 @@ body {
     max-width: 600px;
     margin: auto;
     text-align: center;
+    padding: 30px;
+    border-radius: 30px;
+    margin-top: 50px;
+    border-right: dotted;
+    border-left: dotted;
+    background-image: url(https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L3B4MTIwNDk4OS1pbWFnZS1rd3Z5M2R1Yy5qcGc.jpg);
 }
 
 .todo-list {
@@ -17,7 +30,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 0.5em;
-    padding: 0;
+    padding: 15px;
     margin: 0;
 }
 
@@ -25,4 +38,13 @@ body {
     width: 100%;
     display: flex;
     justify-content: space-between;
+}
+
+.done {
+    background-color: purple;
+}
+
+input {
+    border-radius: 5px;
+    height: 22px;   
 }

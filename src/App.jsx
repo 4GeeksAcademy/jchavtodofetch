@@ -1,5 +1,8 @@
 import { useState } from "react";
 import "./App.css";
+import { useEffect } from "react";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "./lib/firebase";
 
 function App() {
   const [todos, setTodos] = useState([
@@ -32,6 +35,20 @@ function App() {
     
     setTodos(newTodoList);
   };
+
+  useEffect(() => {
+    const todosReference = collection(db, "todos")
+
+    const getData = async () => {
+      const data = await getDocs(todosReference);
+      const todos = data.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setTodos(todos)
+    };
+    getData()
+  }, []);
 
   return (
     <div className="list">

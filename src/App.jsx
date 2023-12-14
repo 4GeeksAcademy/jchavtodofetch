@@ -1,26 +1,30 @@
 import { useState } from "react";
 import "./App.css";
 import { useEffect } from "react";
-import { collection, getDocs } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, getDocs } from "firebase/firestore";
 import { db } from "./lib/firebase";
 
 function App() {
-  const [todos, setTodos] = useState([
-    { id: 1, task: "Complete", done: false },
-  ]);
+  const [todos, setTodos] = useState([]);
   const [newTodo, setNewTodo] = useState("");
 
-  const addTodo = (task) => {
+  const addTodo = async (task) => {
     if (!task) return;
-    const newTodoList = [
-      ...todos,
-      { id: todos.length + 1, task: task, done: false },
+    const todoReference = collection(db,"todos");
+    await addDoc(todoReference, {
+      task: task,
+      done: false,
+    }).then((docRef) => {
+      const newTodoList = [
+        ...todos,
+      { id: docRef.id, task: task, done: false },
     ];
-
     setTodos(newTodoList);
+  })
   };
 
-  const deleteTodo = (id) => {
+  const deleteTodo = async (id) => {
+    await deleteDoc(doc(db, "todos", id))
     const newTodoList = todos.filter((item) => item.id != id);
     setTodos(newTodoList);
   };
@@ -74,13 +78,13 @@ function App() {
       <ul className="todo-list">
         {todos.map((item) => {
           return (
-            <li key={item.id} style={{opacity: item.done ? ".4" : "1"}} className={`todo-item ${item.done ? "done" : ""}`}>
+            <li key={item.id} id={item.id} style={{opacity: item.done ? ".4" : "1"}} className={`todo-item ${item.done ? "done" : ""}`}>
               <input
                 type="checkbox"
                 value={item.done}
                 onChange={(e) => changeTodoState(item.id, e.target.checked)}
               />
-              <span className="todo-text">{item.task}</span>
+              <span className="todo-text">{item.task} </span>
               <button onClick={() => deleteTodo(item.id)} className="delete">
                 🗑
               </button>
